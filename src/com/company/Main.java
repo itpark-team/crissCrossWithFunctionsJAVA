@@ -15,8 +15,8 @@ public class Main {
     9) Вывод победителя
      */
     enum Player {
-        PlayerOne("Первый игрок (X - крестик)"),
-        PlayerTwo("Второй игрок (O - нолик)"),
+        PlayerOne("(X - крестик)"),
+        PlayerTwo("(O - нолик)"),
         None("None");
 
         private String value;
@@ -138,7 +138,7 @@ public class Main {
         return number;
     }
 
-    static void makeStep(FieldCell[][] gameField, int filedSize, FieldCell sign) {
+    static void makeStep(FieldCell[][] gameField, int filedSize, Player currentPlayer) {
         int iStep, jStep;
         boolean stepResult;
 
@@ -155,7 +155,23 @@ public class Main {
 
         } while (!stepResult);
 
-        gameField[iStep][jStep] = sign;
+
+        if (currentPlayer == Player.PlayerOne) {
+            gameField[iStep][jStep] = FieldCell.Cross;
+        } else if (currentPlayer == Player.PlayerTwo) {
+            gameField[iStep][jStep] = FieldCell.Zero;
+        }
+
+
+    }
+
+    static Player changePlayer(Player currentPlayer) {
+        if (currentPlayer == Player.PlayerOne) {
+            return Player.PlayerTwo;
+        } else if (currentPlayer == Player.PlayerTwo) {
+            return Player.PlayerOne;
+        }
+        return Player.None;
     }
 
     public static void main(String[] args) {
@@ -181,15 +197,10 @@ public class Main {
             printlnMessage("Поле игры");
             printField(gameField, fieldSize);
 
-            if (currentPlayer == Player.PlayerOne) {
-                printlnMessage("Ход игрока X");
-                makeStep(gameField, fieldSize, FieldCell.Cross);
-                currentPlayer = Player.PlayerTwo;
-            } else if (currentPlayer == Player.PlayerTwo) {
-                printlnMessage("Ход игрока O");
-                makeStep(gameField, fieldSize, FieldCell.Zero);
-                currentPlayer = Player.PlayerOne;
-            }
+            printlnMessage("Ход игрока " + currentPlayer.getValue());
+            makeStep(gameField, fieldSize, currentPlayer);
+            currentPlayer = changePlayer(currentPlayer);
+
 
             winPlayer = getWinner(gameField);
         }
