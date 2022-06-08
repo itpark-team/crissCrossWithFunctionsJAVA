@@ -185,7 +185,7 @@ public class Main {
 
         currentPlayer = getRandomFirstStepPlayer();
 
-        printlnMessage("первым ходит " + currentPlayer.getValue());
+        printlnMessage("Первым ходит " + currentPlayer.getValue());
 
         waitPressEnter();
 
@@ -201,10 +201,9 @@ public class Main {
             makeStep(gameField, fieldSize, currentPlayer);
             currentPlayer = changePlayer(currentPlayer);
 
-
             winPlayer = getWinner(gameField);
         }
-        printlnMessage("победитель: " + winPlayer.getValue());
+        printlnMessage("Победитель: " + winPlayer.getValue());
 
         printlnMessage("Поле игры");
         printField(gameField, fieldSize);
