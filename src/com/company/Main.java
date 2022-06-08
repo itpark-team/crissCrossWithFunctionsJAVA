@@ -175,7 +175,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
         FieldCell[][] gameField;
         int fieldSize = 3;
         Player currentPlayer, winPlayer = Player.None;
@@ -193,7 +192,6 @@ public class Main {
         clearField(gameField, fieldSize);
 
         while (winPlayer == Player.None) {
-
             printlnMessage("Поле игры");
             printField(gameField, fieldSize);
 
